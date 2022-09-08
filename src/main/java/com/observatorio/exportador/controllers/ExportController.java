@@ -6,6 +6,7 @@ import java.nio.file.Paths;
 
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,10 +20,11 @@ public class ExportController {
 	
 	@GetMapping("/por-nome")
 	public HttpEntity<byte[]> fileDownload(@RequestParam String fileName) throws IOException {
-        byte[] arquivo = Files.readAllBytes( Paths.get("/home/izaque/Documentos/files/" + fileName) );
+        byte[] arquivo = Files.readAllBytes( Paths.get("/home/garsoft/Documentos/" + fileName) );
         HttpHeaders httpHeaders = new HttpHeaders();
+        System.out.println(fileName);
         httpHeaders.add("Content-Disposition", "attachment;filename=" + fileName);
-        HttpEntity<byte[]> entity = new HttpEntity<byte[]>( arquivo, httpHeaders);
+        HttpEntity<byte[]> entity = new HttpEntity<byte[]>( arquivo, httpHeaders)
         return entity;
     }
 }
